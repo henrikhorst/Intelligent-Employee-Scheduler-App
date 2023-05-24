@@ -1,0 +1,20 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}
+    Neuer Mitarbeiter
+{% endblock title %}
+
+{% block content %}
+<main>
+    <p></p>
+    <form  method="post">
+        {% csrf_token %}
+        {{form}}
+        <button type="submit">Hinzufügen</button>
+    </form>
+    <p></p>
+    <form method="GET" action="{% url 'employees' %}">
+        <button type="submit">Zurück</button>
+</main>
+    
+{% endblock content %}

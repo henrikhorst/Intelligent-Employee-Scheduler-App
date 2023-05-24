@@ -1,0 +1,25 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}
+Neuen Dienstplan erstellen
+{% endblock title %}
+
+{% block content %}
+<main>
+    <p></p>
+    <form  method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class= "form-control {% if field.errors %}errors{% endif %}">
+            {{field.label_tag}}
+            {{field}}
+            {{field.errors}}
+        </div>
+        {% endfor %}
+        <button type="submit">Erstellen</button>
+    </form>
+    
+</main>
+
+    
+{% endblock content %}

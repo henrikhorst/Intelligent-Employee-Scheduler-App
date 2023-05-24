@@ -1,0 +1,31 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}
+Dienstplan
+{% endblock title %}
+
+{% block content %}
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+      </tr>
+    </thead>
+    <tbody>
+        {% for calender_week in calender_weeks %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td><a href="{{calender_week.get_absolute_url}}">{{calender_week.name}}</a></td>
+
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<p></p>
+<a href="{% url 'schedule-add'%}" class="btn">Neuen Dienstplan erstellen</a>
+
+{% endblock content %}

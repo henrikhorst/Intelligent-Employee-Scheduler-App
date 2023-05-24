@@ -1,0 +1,59 @@
+{% extends 'scheduler/base.html' %}
+{% load static  %}
+{% block title %}
+   Startseite
+{% endblock title %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'scheduler/styles.css' %}">
+
+{% endblock css_files %}
+
+{% block content %}
+
+
+<br>
+{% if user.is_authenticated %}
+   <img src="{% static 'scheduler/images/index.png' %}" alt="Hintergrundbild mit Arbeiter und Uhr">
+{% else %}
+<div class="col-md-6 offset-md-3">
+   <h1>Login</h1>
+   <br>
+   {% if messages %}
+      {% for message in messages %}
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+         {{message}}
+         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+         
+      
+      {% endfor %}
+   {% endif %}
+   <form action="{% url 'index' %}" method="POST">
+      {% csrf_token %}
+      
+         <div class="mb-3">
+           <label for="exampleInputEmail1" class="form-label">Benutzername</label>
+           <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+           
+         <div class="mb-3">
+           <label for="exampleInputPassword1" class="form-label">Passwort</label>
+           <input type="password" name="password" class="form-control" id="exampleInputPassword1">
+         </div>
+         
+         <button type="submit" class="btn btn-secondary">Login</button>
+         
+       
+   
+   </form>
+   <p></p>
+   <p>Oder registrieren:</p>
+
+   <form action="/register" method="GET">
+      <button type="submit" class="btn btn-primary">Registrieren</button>
+   </form>
+   <br>
+   </div>
+{% endif %}
+
+
+{% endblock content %}

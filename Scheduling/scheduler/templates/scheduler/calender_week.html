@@ -1,0 +1,97 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}
+Dienstplan
+{% endblock title %}
+
+{% block content %}
+
+<h1>{{single_schedule.name}}</h1>
+<table class="table table-striped table-hover table-bordered">
+    <thead class="table-light">
+    
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">Name</th>
+            <th colspan="3">Montag</th>
+            <th colspan="3">Dienstag</th>
+            <th colspan="3">Mittwoch</th>
+            <th colspan="3">Donnerstag</th>
+            <th colspan="3">Freitag</th>
+            <th colspan="3">Samstag</th>
+            <th colspan="3">Sonntag</th>
+
+        </tr>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col"></th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Schichten</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for schedule, sum_boolean_list in combined %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{schedule.employee.name}}</td>
+            <td>{% if schedule.monday_1 %}X{% endif %}</td>
+            <td>{% if schedule.monday_2 %}X{% endif %}</td>
+            <td>{% if schedule.monday_3 %}X{% endif %}</td>
+            <td>{% if schedule.tuesday_1 %}X{% endif %}</td>
+            <td>{% if schedule.tuesday_2 %}X{% endif %}</td>
+            <td>{% if schedule.tuesday_3 %}X{% endif %}</td>
+            <td>{% if schedule.wednesday_1 %}X{% endif %}</td>
+            <td>{% if schedule.wednesday_2 %}X{% endif %}</td>
+            <td>{% if schedule.wednesday_3 %}X{% endif %}</td>
+            <td>{% if schedule.thursday_1 %}X{% endif %}</td>
+            <td>{% if schedule.thursday_2 %}X{% endif %}</td>
+            <td>{% if schedule.thursday_3 %}X{% endif %}</td>
+            <td>{% if schedule.friday_1 %}X{% endif %}</td>
+            <td>{% if schedule.friday_2 %}X{% endif %}</td>
+            <td>{% if schedule.friday_3 %}X{% endif %}</td>
+            <td>{% if schedule.saturday_1 %}X{% endif %}</td>
+            <td>{% if schedule.saturday_2 %}X{% endif %}</td>
+            <td>{% if schedule.saturday_3 %}X{% endif %}</td>
+            <td>{% if schedule.sunday_1 %}X{% endif %}</td>
+            <td>{% if schedule.sunday_2 %}X{% endif %}</td>
+            <td>{% if schedule.sunday_3 %}X{% endif %}</td>
+            <td>{{ sum_boolean_list }}</td>
+            
+            
+
+            
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+
+<p></p>
+<form action="{% url 'schedule'%}" method="POST">
+    {% csrf_token %}
+    <button type="submit">Neuen Dienstplan erstellen</button>
+</form>
+<p></p>
+    
+{% endblock content %}

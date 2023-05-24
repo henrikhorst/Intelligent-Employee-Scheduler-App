@@ -1,0 +1,24 @@
+{% extends 'scheduler/base.html' %}
+{% load static %}
+{% block title %}
+Staff
+{% endblock title %}
+{% block css_files %}
+    <link rel="stylesheet" href="{% static 'scheduler/styles.css' %}">
+{% endblock css_files %}
+{% block content %}
+    
+    <ul>
+        {% for employee in employees %}
+        <li><a href="{{employee.get_absolute_url}}">{{employee.name}}</a></li>
+        {% endfor %}
+        
+    </ul>
+    <form method="GET" action="{% url 'add_employee' %}">
+        <button type="submit">Neuen Mitarbeiter anlegen</button>
+    <p></p>
+    </form>
+    <form method="GET" action="{% url 'schedule' %}">
+        <button type="submit">Zu den Dienstplänen</button>
+    </form>
+{% endblock content %}

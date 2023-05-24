@@ -1,0 +1,86 @@
+{% extends 'scheduler/base.html' %}
+
+{% block title %}
+    {{name}}
+{% endblock title %}
+
+{% block content %}
+    <h1>{{employee.name}}</h1>
+    <p>Arbeitsstunden pro Woche: {{employee.working_hours_per_week}}</p>
+    <p>Bereits gearbeitete Stunden: {{employee.worked_hours}}</p>
+    <p>Umrechnung in Schichten: {{employee.shifts_per_week}}</p>
+    <p>{{path}}</p>
+    <table class="table table-striped table-hover table-bordered">
+        <thead class="table-light">
+          <tr>
+            <th scope="col"></th>
+            <th scope="col"></th>
+            <th colspan="3">Montag</th>
+            <th colspan="3">Dienstag</th>
+            <th colspan="3">Mittwoch</th>
+            <th colspan="3">Donnerstag</th>
+            <th colspan="3">Freitag</th>
+            <th colspan="3">Samstag</th>
+            <th colspan="3">Sonntag</th>
+    
+        </tr>
+        <tr>
+            <th scope="col"></th>
+            <th scope="col">#</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+            <th scope="col">Früh</th>
+            <th scope="col">Spät</th>
+            <th scope="col">Nacht</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row"></th>
+                <td>Präferenz:</td>
+                <td>{{employee.preferences.get_monday_1_display}}</td>
+                <td>{{employee.preferences.get_monday_2_display}}</td>
+                <td>{{employee.preferences.get_monday_3_display}}</td>
+                <td>{{employee.preferences.get_tuesday_1_display}}</td>
+                <td>{{employee.preferences.get_tuesday_2_display}}</td>
+                <td>{{employee.preferences.get_tuesday_3_display}}</td>
+                <td>{{employee.preferences.get_wednesday_1_display}}</td>
+                <td>{{employee.preferences.get_wednesday_2_display}}</td>
+                <td>{{employee.preferences.get_wednesday_3_display}}</td>
+                <td>{{employee.preferences.get_thursday_1_display}}</td>
+                <td>{{employee.preferences.get_thursday_2_display}}</td>
+                <td>{{employee.preferences.get_thursday_3_display}}</td>
+                <td>{{employee.preferences.get_friday_1_display}}</td>
+                <td>{{employee.preferences.get_friday_2_display}}</td>
+                <td>{{employee.preferences.get_friday_3_display}}</td>
+                <td>{{employee.preferences.get_saturday_1_display}}</td>
+                <td>{{employee.preferences.get_saturday_2_display}}</td>
+                <td>{{employee.preferences.get_saturday_3_display}}</td>
+                <td>{{employee.preferences.get_sunday_1_display}}</td>
+                <td>{{employee.preferences.get_sunday_2_display}}</td>
+                <td>{{employee.preferences.get_sunday_3_display}}</td>
+                
+            </tr>
+        
+          
+        </tbody>
+      </table>
+      <a href="{% url 'change-preferences'%}" class="btn">Präferenzen ändern</a>
+        
+{% endblock content %}
