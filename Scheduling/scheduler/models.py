@@ -1,9 +1,11 @@
 from django.db import models
 from django.utils.text import slugify
 from django.urls import reverse
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Employee(models.Model):
+    user = models.ForeignKey(User, related_name='employee', on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=50)
     working_hours_per_week = models.PositiveIntegerField(default=0)
     worked_hours = models.PositiveIntegerField(default=0)

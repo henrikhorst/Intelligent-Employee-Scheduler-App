@@ -91,15 +91,43 @@ def employees(request):
             'username': request.user.username,
             'email': request.user.email,
         }
-        return render(request,"scheduler/employees.html", {
-            "employees" : [],
-        })
-    else:
-        # The user is not logged in. Render a standard page.
-        employees = Employee.objects.all()
+        employees = Employee.objects.filter(user=request.user)
         return render(request,"scheduler/employees.html", {
             "employees" : employees,
         })
+    else:
+        # The user is not logged in. Render a standard page.
+        employees = Employee.objects.filter(user=None)
+        return render(request,"scheduler/employees.html", {
+            "employees" : employees,
+        })
+
+def employee(request, id):
+    employee = get_object_or_404(Employee, pk=id)
+    path = employee.name.lower().replace(" ", "_")
+    return render(request, "scheduler/employee.html", {
+        "employee" : employee,
+        "path" : f"{path}.jpg",
+    })
+
+def add_employee(request):
+    if request.method == 'POST':
+        form = NewEmployeeForm(request.POST)
+
+        if form.is_valid():
+            employee = Employee(user= request.user, name=form.cleaned_data['name'],shifts_per_week=form.cleaned_data['shifts_per_week'])
+            employee.save()
+            return HttpResponseRedirect("./")
+    else:
+        form = NewEmployeeForm()
+    return render(request, "scheduler/add_employee.html", {
+        "form": form
+    })
+
+def change_preferences(request):
+    form = ChangePrefernecesForm()
+    return render(request, 'scheduler/change_preferences.html', {'form': form})
+
 
 def schedule(request):
     if request.user.is_authenticated:
@@ -547,31 +575,6 @@ def schedule_add(request):
     })
 
 
-def employee(request, id):
-    employee = get_object_or_404(Employee, pk=id)
-    path = employee.name.lower().replace(" ", "_")
-    return render(request, "scheduler/employee.html", {
-        "employee" : employee,
-        "path" : f"{path}.jpg",
-    })
-
-def add_employee(request):
-    if request.method == 'POST':
-        form = NewEmployeeForm(request.POST)
-
-        if form.is_valid():
-            employee = Employee(name=form.cleaned_data['name'],shifts_per_week=form.cleaned_data['shifts_per_week'])
-            employee.save()
-            return HttpResponseRedirect("./")
-    else:
-        form = NewEmployeeForm()
-    return render(request, "scheduler/add_employee.html", {
-        "form": form
-    })
-
-def change_preferences(request):
-    form = ChangePrefernecesForm()
-    return render(request, 'scheduler/change_preferences.html', {'form': form})
 
 
 def login_user(request):
